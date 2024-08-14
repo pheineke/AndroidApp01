@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -39,60 +40,24 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-val imageResources = listOf(
-    R.drawable.meme01,
-    R.drawable.meme02,
-    R.drawable.meme03,
-    R.drawable.meme04,
-    R.drawable.meme05
-)
-
 @Composable
 fun MyScreen() {
-    var text by remember { mutableStateOf("") }
-    var readText by remember { mutableStateOf("You didnt roll the dice yet") }
-    var showImage by remember { mutableStateOf(false) }
 
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        if (showImage) {
-            var imageResource = imageResources.random()
+        Row (
+            modifier = Modifier.fillMaxSize()
+        ) {
             Image(
-                painter = painterResource(
-                    id = imageResource
-                ),
-                contentDescription = "My Image",
-                modifier = Modifier.size(400.dp)
+                painter = painterResource(id = R.drawable.lelouch),
             )
+            Text(text = "Lelouch Lamperouge", fontSize = 24.sp)
         }
 
-        Spacer(modifier = Modifier.height(16.dp))
 
-        TextField(
-            value = text,
-            onValueChange = { text = it },
-            label = { Text("Enter Number of Sides") },
-        )
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Button(onClick = {
-            showImage = true
-            if (text.isNotEmpty()) {
-                try {
-                    readText = RollDice(text.toInt()).toString()
-                } catch (e: NumberFormatException) {
-                    readText = "Invalid input"
-                }
-
-            }
-        }) {
-            Text("Roll Dice")
-        }
-        Spacer(modifier = Modifier.height(16.dp))
-        Text(text = "You rolled a ${readText}")
 
     }
 }
