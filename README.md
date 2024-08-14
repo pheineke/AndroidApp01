@@ -1,3 +1,3 @@
 ### This is my first Kotlin - Android App
 
-![First App Insight](app.png "First App Insight")
+<img src="app.jpg" alt="First App Insight" width="200"/>
